@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Dummy.Web.Api.Middleware;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -67,6 +68,11 @@ namespace Dummy.Web.Api
             }
 
             app.UseHttpsRedirection();
+
+            app.UseMiddleware<ExceptionHandlingMiddleware>();
+
+            // Enable Log4net.
+            loggerFactory.AddLog4Net();
 
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
