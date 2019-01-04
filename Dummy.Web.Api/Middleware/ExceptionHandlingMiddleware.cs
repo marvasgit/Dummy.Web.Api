@@ -11,8 +11,7 @@
     public class ExceptionHandlingMiddleware
     {
         private readonly RequestDelegate _next;
-        private static readonly log4net.ILog log =
-       log4net.LogManager.GetLogger(typeof(Program));
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(typeof(Program));
 
         private const string DefaultResponseString = "An unexpected error occured. The details of the error have been logged. If this continues to happen please contact your  Administrator.";
 
@@ -38,50 +37,39 @@
         {
             var addInfo = new NameValueCollection
             {
-                { $"ExceptionHandlingMiddleware caught exception:", ex.GetType().ToString() }
+                { "ExceptionHandlingMiddleware caught exception:", ex.GetType().ToString() }
             };
+            log.Debug(JsonConvert.SerializeObject(addInfo));
 
             if (ex is NotImplementedException)
             {
-                log.Debug(new NotImplementedException());
-
                 await WriteErrorResponseAsync(context, HttpStatusCode.NotImplemented, null);
             }
             else if (ex is InvalidOperationException)
             {
-                log.Debug(new InvalidOperationException());
-
                 await WriteErrorResponseAsync(context, HttpStatusCode.BadRequest, new ErrorDetail(ex.Message));
             }
             else if (ex is ArgumentNullException || ex is ArgumentException)
             {
-                log.Debug(new ArgumentException());
-
                 await WriteErrorResponseAsync(context, HttpStatusCode.InternalServerError, new ErrorDetail(ex.Message));
             }
             else if (ex is EntityNotFoundException
                 || typeof(EntityNotFoundException<int>).IsAssignableFrom(ex.GetType())
                 || typeof(EntityNotFoundException<string>).IsAssignableFrom(ex.GetType()))
             {
-                log.Debug(new EntityNotFoundException<int>());
-
-                await WriteErrorResponseAsync(context, HttpStatusCode.NotFound, null);
+                await WriteErrorResponseAsync(context, HttpStatusCode.NotFound, addInfo);
             }
             else if (typeof(EntityAlreadyExistsException).IsAssignableFrom(ex.GetType()))
             {
-                log.Debug(new EntityAlreadyExistsException());
-
                 await WriteErrorResponseAsync(context, HttpStatusCode.BadRequest, new ErrorDetail(ex.Message));
             }
             else if (ex is TimeoutException)
             {
-                log.Debug(new TimeoutException());
-
                 await WriteErrorResponseAsync(context, HttpStatusCode.ServiceUnavailable);
             }
             else
             {
-                await WriteErrorResponseAsync(context, HttpStatusCode.InternalServerError, new ErrorDetail(ExceptionHandlingMiddleware.DefaultResponseString));
+                await WriteErrorResponseAsync(context, HttpStatusCode.InternalServerError, new ErrorDetail(DefaultResponseString));
             }
         }
 
@@ -90,15 +78,14 @@
             context.Response.Clear();
             context.Response.StatusCode = (int)statusCode;
 
-
             if (error != null)
             {
-                log.Debug(error);
+                log.Debug(JsonConvert.SerializeObject(error));
                 await context.Response.WriteAsync(JsonConvert.SerializeObject(error));
             }
             else
             {
-                log.Error(error);
+                log.Error(DefaultResponseString);
             }
         }
     }

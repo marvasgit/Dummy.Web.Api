@@ -18,7 +18,19 @@
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
-            return new string[] { "value1", "value2" };
+            try
+            {
+                return new string[] { "value1", "value2" };
+            }
+            catch (System.Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                throw new System.ArgumentException("test exceptions");
+            }
         }
 
         // GET api/values/5
