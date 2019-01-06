@@ -1,12 +1,13 @@
 ﻿namespace Dummy.Web.Api.Middleware
 {
-    using Dummy.Web.Api.Models;
-    using Microsoft.AspNetCore.Http;
-    using Newtonsoft.Json;
     using System;
     using System.Collections.Specialized;
     using System.Net;
     using System.Threading.Tasks;
+    using Dummy.Web.Api.Models;
+    using Dummy.Web.Common.Exceptions;
+    using Microsoft.AspNetCore.Http;
+    using Newtonsoft.Json;
 
     public class ExceptionHandlingMiddleware
     {

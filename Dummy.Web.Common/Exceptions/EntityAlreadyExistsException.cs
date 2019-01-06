@@ -1,4 +1,4 @@
-﻿namespace Dummy.Web.Api.Middleware
+﻿namespace Dummy.Web.Common.Exceptions
 {
     using System;
 
