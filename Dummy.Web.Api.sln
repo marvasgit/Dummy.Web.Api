@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dummy.Web.Repository", "Dum
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dummy.Web.DataAccess", "Dummy.Web.DataAccess\Dummy.Web.DataAccess.csproj", "{59FE6A07-3A06-4AC0-8015-3D7A83DAB572}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dummy.Web.Logic.Test", "Dummy.Web.Logic.Test\Dummy.Web.Logic.Test.csproj", "{9E5C1AF3-60E7-447B-8966-FA4C0CB529A2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{59FE6A07-3A06-4AC0-8015-3D7A83DAB572}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{59FE6A07-3A06-4AC0-8015-3D7A83DAB572}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{59FE6A07-3A06-4AC0-8015-3D7A83DAB572}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E5C1AF3-60E7-447B-8966-FA4C0CB529A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E5C1AF3-60E7-447B-8966-FA4C0CB529A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E5C1AF3-60E7-447B-8966-FA4C0CB529A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E5C1AF3-60E7-447B-8966-FA4C0CB529A2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
