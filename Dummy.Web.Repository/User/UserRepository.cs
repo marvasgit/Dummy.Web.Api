@@ -1,8 +1,75 @@
-﻿using System;
-
-namespace Dummy.Web.Repository.User
+﻿namespace Dummy.Web.Repository.User
 {
-    public class UserRepository
+    using System;
+    using System.Collections.Generic;
+    using System.Data;
+    using Dapper;
+    using Dummy.Web.Common.Enums;
+    using Dummy.Web.Common.Models;
+    using Dummy.Web.DataAccess;
+
+    public class UserRepository : IUserRepository
     {
+        private readonly IDapperHelper _dapperHelper;
+        private readonly string GetActiveUsersStoredProcedureName = "dbo.DummyPerson_GetActive";
+        private readonly string UpdateUserStoredProcedure = "dbo.DummyPerson_Update_By_PK";
+        private readonly string DeleteUserByEmailStoredProcedure = "dbo.DummyPerson_Delete_By_Email";
+        private readonly string DeleteUserByPrimaryKeyStoredProcedure = "dbo.DummyPerson_Delete_By_PK";
+        private const string UserRegistrationStoredProcedure = "dbo.DummyPerson_Insert";
+
+        public UserRepository(IDapperHelper dapperHelper)
+        {
+            _dapperHelper = dapperHelper;
+        }
+
+        public int AddUser(string userName, string firstName, string lastName, DateTime created, string password, string email, GenderType gender, bool status = true)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@UserName", userName);
+            parameters.Add("@FirstName", firstName);
+            parameters.Add("@DateCreated", created);
+            parameters.Add("@LastName", lastName);
+            parameters.Add("@Password", password);
+            parameters.Add("@Gender", gender);
+            parameters.Add("@Status", status);
+            parameters.Add("@Email", email);
+
+            return _dapperHelper.ExecuteStoredProcedure<System.Int32>(CommandType.StoredProcedure, UserRegistrationStoredProcedure, parameters);
+        }
+
+        public bool DeleteUser(string email)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@Email", email);
+
+            return _dapperHelper.ExecuteStoredProcedure<bool>(CommandType.StoredProcedure, DeleteUserByEmailStoredProcedure, parameters);
+        }
+        public bool DeleteUser(int id)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@ID", id);
+
+            return _dapperHelper.ExecuteStoredProcedure<bool>(CommandType.StoredProcedure, DeleteUserByPrimaryKeyStoredProcedure, parameters);
+        }
+
+        public bool UpdateUser(UserModel user, string password, bool status = true)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@UserName", user.UserName);
+            parameters.Add("@FirstName", user.GivenName);
+            parameters.Add("@DateCreated", user.Created);
+            parameters.Add("@LastName", user.FamilyName);
+            parameters.Add("@Password", password);
+            parameters.Add("@Gender", user.Gender);
+            parameters.Add("@Status", status);
+            parameters.Add("@Email", user.Email);
+
+            return _dapperHelper.ExecuteStoredProcedure<bool>(CommandType.StoredProcedure, UpdateUserStoredProcedure, parameters);
+        }
+
+        public IEnumerable<UserModel> GetActiveUsers()
+        {
+            return _dapperHelper.ExecuteDataset<UserModel>(CommandType.StoredProcedure, GetActiveUsersStoredProcedureName);
+        }
     }
 }
