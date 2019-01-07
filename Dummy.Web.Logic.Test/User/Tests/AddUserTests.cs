@@ -1,6 +1,7 @@
 ﻿namespace Dummy.Web.Logic.Test.User.Tests
 {
     using System;
+    using Dummy.Web.Common.Exceptions;
     using Dummy.Web.Logic.Common;
     using Dummy.Web.Logic.Test.Extensions;
     using Dummy.Web.Logic.Test.User.Fakes;
@@ -26,32 +27,32 @@
         }
 
         [TestMethod]
-        [ExpectedCustomException(typeof(NullReferenceException), UserErrorMessagesConstants.Null)]
+        [ExpectedCustomException(typeof(InvalidModelException), UserErrorMessagesConstants.ModelCantBeNull)]
         public void Should_Thrown_When_UserData_IsNull()
         {
             _userLogic.AddUser(null);
         }
 
         [TestMethod]
-        [ExpectedCustomException(typeof(NullReferenceException), UserErrorMessagesConstants.Null)]
+        [ExpectedCustomException(typeof(InvalidModelException), UserErrorMessagesConstants.FirstNameIsNull)]
         public void Should_Thrown_When_FirstName_isNullorEmpty()
         {
             var user = new FakeUserCreateModel(null, RandomGenerator.RandomString(3), RandomGenerator.RandomEmailAddress(12));
 
-            _userLogic.AddUser(null);
+            _userLogic.AddUser(user);
         }
 
         [TestMethod]
-        [ExpectedCustomException(typeof(NullReferenceException), UserErrorMessagesConstants.Null)]
+        [ExpectedCustomException(typeof(InvalidModelException), UserErrorMessagesConstants.LastNameIsNull)]
         public void Should_Thrown_When_LastName_isNullorEmpty()
         {
             var user = new FakeUserCreateModel(RandomGenerator.RandomString(3), null, RandomGenerator.RandomEmailAddress(12));
 
-            _userLogic.AddUser(null);
+            _userLogic.AddUser(user);
         }
 
         [TestMethod]
-        [ExpectedCustomException(typeof(NullReferenceException), UserErrorMessagesConstants.Null)]
+        [ExpectedCustomException(typeof(InvalidModelException), UserErrorMessagesConstants.EmailisNull)]
         public void Should_Thrown_When_Email_isNullorEmpty()
         {
             var user = new FakeUserCreateModel(RandomGenerator.RandomString(3), RandomGenerator.RandomString(3), null);
