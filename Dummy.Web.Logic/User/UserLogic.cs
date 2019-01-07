@@ -8,7 +8,6 @@
     using Dummy.Web.Common.Models.User;
     using Dummy.Web.Logic.Common;
     using Dummy.Web.Repository.User;
-    using PasswordUtility.PasswordGenerator;
 
     public class UserLogic
     {
@@ -24,13 +23,15 @@
         {
             ValidateModel(userCreateModel);
 
+            var password = PasswordGenerator.GenerateRandomPassword(passwordLenght);
+
             var complexUser = new UserModel
             {
                 FamilyName = userCreateModel.FamilyName,
                 GivenName = userCreateModel.GivenName,
                 Email = userCreateModel.Email,
                 UserName = UserNameGenerator(userCreateModel),
-                Password = PwGenerator.Generate(passwordLenght).ReadString(),
+                Password = password,
                 Created = DateTime.Now,
                 Gender = GenderType.Unknown,
             };

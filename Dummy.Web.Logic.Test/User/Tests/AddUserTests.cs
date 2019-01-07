@@ -1,7 +1,7 @@
 ﻿namespace Dummy.Web.Logic.Test.User.Tests
 {
-    using System;
     using Dummy.Web.Common.Exceptions;
+    using Dummy.Web.Common.Models.User;
     using Dummy.Web.Logic.Common;
     using Dummy.Web.Logic.Test.Extensions;
     using Dummy.Web.Logic.Test.User.Fakes;
@@ -14,9 +14,11 @@
     public class AddUserTests
     {
         private readonly UserLogic _userLogic;
+        private const int excpectedResult = 5;
         public AddUserTests()
         {
             var userRepository = new Mock<IUserRepository>();
+            userRepository.Setup(x => x.AddUser(It.IsAny<UserModel>(), true)).Returns(excpectedResult);
             _userLogic = new UserLogic(userRepository.Object);
         }
 
@@ -65,7 +67,7 @@
         {
             var fakeUser = new FakeUserCreateModel();
 
-            Assert.AreEqual(_userLogic.AddUser(fakeUser), true);
+            Assert.AreEqual(excpectedResult, _userLogic.AddUser(fakeUser));
         }
     }
 }
