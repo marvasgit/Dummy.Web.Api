@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Dummy.Web.DataAccess\Dummy.Web.DataAccess.csproj" />
+    <ProjectReference Include="..\Dummy.Web.Repository\Dummy.Web.Repository.csproj" />
   </ItemGroup>
 
 </Project>

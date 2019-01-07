@@ -1,15 +1,13 @@
 ﻿namespace Dummy.Web.Repository.User
 {
-    using System;
     using System.Collections.Generic;
-    using Dummy.Web.Common.Enums;
-    using Dummy.Web.Common.Models;
+    using Dummy.Web.Common.Models.User;
 
     public interface IUserRepository
     {
-        int AddUser(string userName, string firstName, string lastName, DateTime created, string password, string email, GenderType gender, bool status = true);
+        int AddUser(UserModel user, bool status = true);
         bool DeleteUser(string email);
-        IEnumerable<UserModel> GetActiveUsers();
-        bool UpdateUser(UserModel user, string password, bool status = true);
+        IEnumerable<UserModelSimplified> GetActiveUsers();
+        bool UpdateUser(UserModel user, bool status = true);
     }
 }
