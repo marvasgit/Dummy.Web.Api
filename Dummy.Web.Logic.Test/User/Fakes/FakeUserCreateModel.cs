@@ -4,7 +4,7 @@ using Dummy.Web.Logic.Test.Extensions;
 
 namespace Dummy.Web.Logic.Test.User.Fakes
 {
-    public class FakeUserCreateModel : UserModel
+    public class FakeUserCreateModel : UserCreateModel
     {
         public FakeUserCreateModel() : this(RandomGenerator.RandomString(5), RandomGenerator.RandomString(7), RandomGenerator.RandomEmailAddress(4))
         {
@@ -16,10 +16,6 @@ namespace Dummy.Web.Logic.Test.User.Fakes
             GivenName = firstName;
             FamilyName = lastName;
             Email = email;
-            Gender = 0;
-            UserName = $"{GivenName.Substring(0, 3)}{FamilyName.Substring(0, 3)}";
-            Password = RandomGenerator.RandomString(65);
-            Created = DateTime.Now;
         }
 
         public FakeUserCreateModel WithEmptyFirstName()
