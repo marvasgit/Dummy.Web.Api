@@ -49,6 +49,10 @@
             return _userRepository.DeleteUser(email);
         }
 
+        public IEnumerable<UserModelSimplified> GetAvailableUsers()
+        {
+            return _userRepository.GetActiveUsers();
+        }
 
         private void ValidateModel(object model)
         {
@@ -74,7 +78,7 @@
             }
         }
 
-        public string UserNameGenerator(UserCreateModel user)
+        private string UserNameGenerator(UserCreateModel user)
         {
             return $"{user.GivenName.Substring(0, 3)}{user.FamilyName.Substring(0, 3)}";
         }

@@ -11,6 +11,7 @@
         string GivenName { get; set; }
         string FamilyName { get; set; }
         string Email { get; set; }
+        bool Status { get; set; }
         int Id { get; set; }
         DateTime Created { get; set; }
     }

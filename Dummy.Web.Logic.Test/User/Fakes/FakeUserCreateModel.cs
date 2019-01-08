@@ -5,7 +5,7 @@
 
     public class FakeUserCreateModel : UserCreateModel
     {
-        public FakeUserCreateModel() : this(RandomGenerator.RandomString(5), RandomGenerator.RandomString(7), RandomGenerator.RandomEmailAddress(4))
+        public FakeUserCreateModel() : this(RandomGenerator.RandomString(5), RandomGenerator.RandomString(7), RandomGenerator.RandomEmailAddress(14))
         {
 
         }
