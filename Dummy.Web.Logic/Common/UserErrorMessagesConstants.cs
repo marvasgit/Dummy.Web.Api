@@ -6,6 +6,8 @@
 
         public const string EmailisNull = "The Email field is required.";
 
+        public const string EmailIsInvalid = "{0} is invalid Email";
+
         public const string FirstNameIsNull = "The GivenName field is required.";
 
         public const string LastNameIsNull = "The FamilyName field is required.";

@@ -39,7 +39,7 @@
         [ExpectedCustomException(typeof(InvalidModelException), UserErrorMessagesConstants.FirstNameIsNull)]
         public void Should_Thrown_When_FirstName_isNullorEmpty()
         {
-            var user = new FakeUserCreateModel(null, RandomGenerator.RandomString(3), RandomGenerator.RandomEmailAddress(12));
+            var user = new FakeUserCreateModel().WithEmptyFirstName();
 
             _userLogic.AddUser(user);
         }
@@ -48,7 +48,7 @@
         [ExpectedCustomException(typeof(InvalidModelException), UserErrorMessagesConstants.LastNameIsNull)]
         public void Should_Thrown_When_LastName_isNullorEmpty()
         {
-            var user = new FakeUserCreateModel(RandomGenerator.RandomString(3), null, RandomGenerator.RandomEmailAddress(12));
+            var user = new FakeUserCreateModel().WithEmptyLastName();
 
             _userLogic.AddUser(user);
         }
@@ -57,7 +57,16 @@
         [ExpectedCustomException(typeof(InvalidModelException), UserErrorMessagesConstants.EmailisNull)]
         public void Should_Thrown_When_Email_isNullorEmpty()
         {
-            var user = new FakeUserCreateModel(RandomGenerator.RandomString(3), RandomGenerator.RandomString(3), null);
+            var user = new FakeUserCreateModel().WithEmptyEmail();
+
+            _userLogic.AddUser(user);
+        }
+
+        [TestMethod]
+        [ExpectedCustomException(typeof(WrongEmailException))]
+        public void Should_Thrown_When_Email_Is_Invalid()
+        {
+            var user = new FakeUserCreateModel().WithEmptyInvalidEmail();
 
             _userLogic.AddUser(user);
         }

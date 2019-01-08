@@ -22,6 +22,7 @@
             _expectedExceptionType = expectedExceptionType;
             _expectedExceptionMessage = expectedExceptionMessage.TrimEnd();
         }
+
         public ExpectedCustomExceptionAttribute(Type expectedExceptionType, IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> validationResult)
         {
             _expectedExceptionType = expectedExceptionType;

@@ -50,9 +50,13 @@
             {
                 await WriteErrorResponseAsync(context, HttpStatusCode.BadRequest, new ErrorDetail(ex.Message));
             }
-            else if (ex is ArgumentNullException || ex is ArgumentException)
+            else if (ex is InvalidModelException)
             {
-                await WriteErrorResponseAsync(context, HttpStatusCode.InternalServerError, new ErrorDetail(ex.Message));
+                await WriteErrorResponseAsync(context, HttpStatusCode.BadRequest, new ErrorDetail(ex.Message));
+            }
+            else if (ex is WrongEmailException)
+            {
+                await WriteErrorResponseAsync(context, HttpStatusCode.BadRequest, new ErrorDetail(ex.Message));
             }
             else if (ex is EntityNotFoundException
                 || typeof(EntityNotFoundException<int>).IsAssignableFrom(ex.GetType())

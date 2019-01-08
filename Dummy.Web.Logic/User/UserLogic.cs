@@ -23,6 +23,8 @@
         {
             ValidateModel(userCreateModel);
 
+            IsValidEmail(userCreateModel.Email);
+
             var password = PasswordGenerator.GenerateRandomPassword(passwordLenght);
 
             var complexUser = new UserModel
@@ -37,8 +39,16 @@
             };
 
             return _userRepository.AddUser(complexUser);
-
         }
+
+        public bool DeleteUser(string email)
+        {
+            ValidateModel(email);
+            IsValidEmail(email);
+
+            return _userRepository.DeleteUser(email);
+        }
+
 
         private void ValidateModel(object model)
         {
@@ -67,6 +77,19 @@
         public string UserNameGenerator(UserCreateModel user)
         {
             return $"{user.GivenName.Substring(0, 3)}{user.FamilyName.Substring(0, 3)}";
+        }
+
+        private bool IsValidEmail(string email)
+        {
+            try
+            {
+                var addr = new System.Net.Mail.MailAddress(email);
+                return addr.Address == email;
+            }
+            catch
+            {
+                throw new WrongEmailException(email);
+            }
         }
     }
 }
