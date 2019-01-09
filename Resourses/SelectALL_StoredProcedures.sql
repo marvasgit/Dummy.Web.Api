@@ -9,9 +9,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE DummyPerson_Get_All_Users 
-	-- Add the parameters for the stored procedure here
-	@Email nvarchar(255) 
+CREATE PROCEDURE DummyPerson_Get_Active_Users 
 AS
 BEGIN TRY
 BEGIN TRAN
@@ -28,7 +26,7 @@ Select [dbo].[Dummy_Persons]
 [Email],
 [DateCreated]
 
-WHERE [dbo].[Dummy_Persons].[Email] = @Email And [Status]!=0
+WHERE [Status] != 1
 
 COMMIT TRAN
 END TRY

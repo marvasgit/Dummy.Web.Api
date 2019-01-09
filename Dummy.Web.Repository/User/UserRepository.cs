@@ -9,7 +9,7 @@
     public class UserRepository : IUserRepository
     {
         private readonly IDapperHelper _dapperHelper;
-        private readonly string GetActiveUsersStoredProcedureName = "dbo.DummyPerson_GetActive";
+        private readonly string GetActiveUsersStoredProcedureName = "dbo.DummyPerson_Get_Active_Users";
         private readonly string UpdateUserStoredProcedure = "dbo.DummyPerson_Update_By_PK";
         private readonly string DeleteUserByEmailStoredProcedure = "dbo.DummyPerson_Delete_By_Email";
         private readonly string DeleteUserByPrimaryKeyStoredProcedure = "dbo.DummyPerson_Delete_By_PK";
