@@ -3,20 +3,21 @@ GO
 -- =============================================
 -- Author:		Marin Vassilev
 -- Create date: 05.01.2019
--- Description:	StoredProcedure for Deleting an Dummy person
+-- Description:	StoredProcedure for Updating a user by ID an Dummy person
 -- =============================================
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE DummyPerson_UPDATE_BY_Email 
+CREATE PROCEDURE DummyPerson_UPDATE_BY_ID 
 	-- Add the parameters for the stored procedure here
-	@Email nvarchar(255) = 0,
-	@UserName nvarchar(255) = 0, 
-	@FirstName nvarchar(255) = 0,
-	@LastName nvarchar(255) = 0, 
-	@Gender nvarchar(255) = 0, 
-	@Password nvarchar(255) = 0
+	@Email nvarchar(255) ,
+	@UserName nvarchar(255) , 
+	@FirstName nvarchar(255) ,
+	@LastName nvarchar(255) , 
+	@Gender nvarchar(255) , 
+	@Password nvarchar(255) ,
+	@ID int
 AS
 BEGIN TRY
 BEGIN TRAN
@@ -28,12 +29,17 @@ BEGIN TRAN
 UPDATE [dbo].[Dummy_Persons] 
 SET
 
-[UserName]=@UserName,
-[LastName]=@LastName,
-[FirstName]=@FirstName,
-[Gender]=@Gender
+[UserName] = @UserName,
+[LastName] = @LastName,
+[FirstName] = @FirstName,
+[Gender] = @Gender,
+[Password] = @Password,
+[UserName] = @UserName,
+[Email] = @Email
 
-WHERE [dbo].[Dummy_Persons].[Email] = @Email
+WHERE [dbo].[Dummy_Persons].[ID] = @ID
+
+RETURN 1
 
 COMMIT TRAN
 END TRY
