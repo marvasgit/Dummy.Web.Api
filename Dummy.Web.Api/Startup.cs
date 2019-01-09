@@ -1,4 +1,9 @@
-﻿using Dummy.Web.Api.Middleware;
+﻿using System;
+using System.IO;
+using System.Reflection;
+using System.Xml;
+using Dummy.Web.Api.Middleware;
+using Dummy.Web.Logic;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -6,10 +11,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Swashbuckle.AspNetCore.Swagger;
-using System;
-using System.IO;
-using System.Reflection;
-using System.Xml;
 
 namespace Dummy.Web.Api
 {
@@ -26,6 +27,7 @@ namespace Dummy.Web.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddLogicService(Configuration.GetSection("ConnectionStrings").GetValue<string>("Primary"));
 
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c =>

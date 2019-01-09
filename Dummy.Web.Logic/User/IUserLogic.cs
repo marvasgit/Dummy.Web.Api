@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using Dummy.Web.Common.Models.User;
-
-namespace Dummy.Web.Logic.User
+﻿namespace Dummy.Web.Logic.User
 {
+    using System.Collections.Generic;
+    using Dummy.Web.Common.Models.User;
+
     public interface IUserLogic
     {
         int AddUser(UserCreateModel userCreateModel);
