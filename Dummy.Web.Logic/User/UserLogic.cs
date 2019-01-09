@@ -9,7 +9,7 @@
     using Dummy.Web.Logic.Common;
     using Dummy.Web.Repository.User;
 
-    public class UserLogic
+    public class UserLogic : IUserLogic
     {
         private readonly IUserRepository _userRepository;
         public const int passwordLenght = 43;
@@ -39,6 +39,14 @@
             };
 
             return _userRepository.AddUser(complexUser);
+        }
+        public bool UpdateUser(UserUpdateModel userUpdateModel)
+        {
+            ValidateModel(userUpdateModel);
+
+            IsValidEmail(userUpdateModel.Email);
+
+            return _userRepository.UpdateUser(userUpdateModel);
         }
 
         public bool DeleteUser(string email)

@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Dummy.Web.Common\Dummy.Web.Common.csproj" />
+    <ProjectReference Include="..\Dummy.Web.Logic\Dummy.Web.Logic.csproj" />
   </ItemGroup>
 
 </Project>

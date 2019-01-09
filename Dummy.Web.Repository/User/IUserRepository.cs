@@ -8,6 +8,6 @@
         int AddUser(UserModel user, bool status = true);
         bool DeleteUser(string email);
         IEnumerable<UserModelSimplified> GetActiveUsers();
-        bool UpdateUser(UserModel user, bool status = true);
+        bool UpdateUser(UserUpdateModel user);
     }
 }

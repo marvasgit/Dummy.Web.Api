@@ -51,17 +51,15 @@
             return _dapperHelper.ExecuteStoredProcedure<bool>(CommandType.StoredProcedure, DeleteUserByPrimaryKeyStoredProcedure, parameters);
         }
 
-        public bool UpdateUser(UserModel user, bool status = true)
+        public bool UpdateUser(UserUpdateModel userUpdateModel)
         {
             var parameters = new DynamicParameters();
-            parameters.Add("@UserName", user.UserName);
-            parameters.Add("@FirstName", user.GivenName);
-            parameters.Add("@DateCreated", user.Created);
-            parameters.Add("@LastName", user.FamilyName);
-            parameters.Add("@Password", user.Password);
-            parameters.Add("@Gender", user.Gender);
-            parameters.Add("@Status", status);
-            parameters.Add("@Email", user.Email);
+            parameters.Add("@UserName", userUpdateModel.UserName);
+            parameters.Add("@FirstName", userUpdateModel.GivenName);
+            parameters.Add("@LastName", userUpdateModel.FamilyName);
+            parameters.Add("@Password", userUpdateModel.Password);
+            parameters.Add("@Gender", userUpdateModel.Gender);
+            parameters.Add("@Email", userUpdateModel.Email);
 
             return _dapperHelper.ExecuteStoredProcedure<bool>(CommandType.StoredProcedure, UpdateUserStoredProcedure, parameters);
         }
