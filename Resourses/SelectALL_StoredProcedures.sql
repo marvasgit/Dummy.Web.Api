@@ -1,15 +1,12 @@
 USE [DummyTable]
 GO
--- =============================================
--- Author:		Marin Vassilev
--- Create date: 09.01.2019
--- Description:	StoredProcedure returning All active Users
--- =============================================
+/****** Object:  StoredProcedure [dbo].[DummyPerson_Get_All_Users]    Script Date: 1/9/2019 11:22:19 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE DummyPerson_Get_Active_Users 
+Create PROCEDURE [dbo].[DummyPerson_Get_Active_Users] 
+	
 AS
 BEGIN TRY
 BEGIN TRAN
@@ -18,16 +15,15 @@ BEGIN TRAN
 	SET NOCOUNT ON;
     -- Update Status to false 
 
-Select [dbo].[Dummy_Persons] 
-
-[ID],
-[LastName],
-[FirstName],
-[Email],
-[DateCreated]
-
-WHERE [Status] != 1
-
+/****** Script for SelectTopNRows command from SSMS  ******/
+SELECT [ID]
+      ,[UserName]
+      ,[LastName]
+      ,[FirstName]
+      ,[Email]
+      ,[DateCreated]
+	   FROM [DummyTable].[dbo].[Dummy_Persons]
+	   WHERE Dummy_Persons.Status != 0
 COMMIT TRAN
 END TRY
 
@@ -50,5 +46,3 @@ SELECT
 RAISERROR(@ErrorMessage_NVC,@ErrorSeverity_INT,1);
 
 END CATCH
-
-GO

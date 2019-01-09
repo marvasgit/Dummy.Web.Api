@@ -62,7 +62,7 @@
             }
         }
 
-        public IList<T> ExecuteDataset<T>(CommandType commandType, string storedProcedureName, DynamicParameters commandParameters)
+        public IList<T> ExecuteDataset<T>(CommandType commandType, string storedProcedureName)
         {
             var triesToConnectCount = 0;
             SetUpCustomPropertyMapping<T>();
@@ -74,7 +74,6 @@
                     using (var connection = OpenConnection())
                     {
                         return connection.Query<T>(storedProcedureName,
-                                                              commandParameters,
                                                               commandType: commandType,
                                                               commandTimeout: SqlHelperConstants.TimeOutInSeconds)
                                                               .ToList();
@@ -126,11 +125,6 @@
             connection.Open();
 
             return connection;
-        }
-
-        public IList<T> ExecuteDataset<T>(CommandType storedProcedure, string storedProcedureName)
-        {
-            throw new System.NotImplementedException();
         }
     }
 }
