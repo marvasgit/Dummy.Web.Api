@@ -10,7 +10,7 @@
     {
         private readonly IDapperHelper _dapperHelper;
         private readonly string GetActiveUsersStoredProcedureName = "dbo.DummyPerson_Get_Active_Users";
-        private readonly string UpdateUserStoredProcedure = "dbo.DummyPerson_Update_By_PK";
+        private readonly string UpdateUserByEmailStoredProcedure = "dbo.DummyPerson_Update_By_Email";
         private readonly string DeleteUserByEmailStoredProcedure = "dbo.DummyPerson_Delete_By_Email";
         private readonly string DeleteUserByPrimaryKeyStoredProcedure = "dbo.DummyPerson_Delete_By_PK";
         private const string UserRegistrationStoredProcedure = "dbo.DummyPerson_Insert";
@@ -61,7 +61,7 @@
             parameters.Add("@Gender", userUpdateModel.Gender);
             parameters.Add("@Email", userUpdateModel.Email);
 
-            return _dapperHelper.ExecuteStoredProcedure<bool>(CommandType.StoredProcedure, UpdateUserStoredProcedure, parameters);
+            return _dapperHelper.ExecuteStoredProcedure<bool>(CommandType.StoredProcedure, UpdateUserByEmailStoredProcedure, parameters);
         }
 
         public IEnumerable<Entities.User> GetActiveUsers()

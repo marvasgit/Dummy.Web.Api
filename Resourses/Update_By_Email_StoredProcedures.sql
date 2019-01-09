@@ -1,21 +1,17 @@
 USE [DummyTable]
 GO
--- =============================================
--- Author:		Marin Vassilev
--- Create date: 05.01.2019
--- Description:	StoredProcedure for Updating a user by Email an Dummy person
--- =============================================
+/****** Object:  StoredProcedure [dbo].[DummyPerson_Update_By_Email]    Script Date: 1/9/2019 12:44:18 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE DummyPerson_UPDATE_BY_Email 
+ALTER PROCEDURE [dbo].[DummyPerson_Update_By_Email] 
 	-- Add the parameters for the stored procedure here
 	@Email nvarchar(255) ,
 	@UserName nvarchar(255) , 
 	@FirstName nvarchar(255) ,
 	@LastName nvarchar(255) , 
-	@Gender nvarchar(255) , 
+	@Gender int , 
 	@Password nvarchar(255) 
 AS
 BEGIN TRY
@@ -27,8 +23,6 @@ BEGIN TRAN
 
 UPDATE [dbo].[Dummy_Persons] 
 SET
-
-[UserName]=@UserName,
 [LastName]=@LastName,
 [FirstName]=@FirstName,
 [Gender]=@Gender,
@@ -36,8 +30,6 @@ SET
 [UserName] = @UserName
 
 WHERE [dbo].[Dummy_Persons].[Email] = @Email
-
-RETURN 1
 
 COMMIT TRAN
 END TRY
@@ -62,4 +54,3 @@ RAISERROR(@ErrorMessage_NVC,@ErrorSeverity_INT,1);
 
 END CATCH
 
-GO

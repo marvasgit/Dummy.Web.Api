@@ -38,16 +38,18 @@
                 Created = DateTime.Now,
                 Gender = GenderType.Unknown,
             };
-            var id = _userRepository.AddUser(complexUser);
-            return id;
+            return _userRepository.AddUser(complexUser);
         }
+
         public bool UpdateUser(UserUpdateModel userUpdateModel)
         {
             ValidateModel(userUpdateModel);
 
             IsValidEmail(userUpdateModel.Email);
 
-            return _userRepository.UpdateUser(userUpdateModel);
+            var test = _userRepository.UpdateUser(userUpdateModel);
+
+            return test;
         }
 
         public bool DeleteUser(string email)
