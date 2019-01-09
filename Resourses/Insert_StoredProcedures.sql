@@ -1,3 +1,5 @@
+USE [DummyTable]
+GO
 -- =============================================
 -- Author:		Marin Vassilev
 -- Create date: 05.01.2019
@@ -9,14 +11,14 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE PROCEDURE DummyPerson_Insert 
 	-- Add the parameters for the stored procedure here
-	@UserName nvarchar(255) = 0, 
-	@FirstName nvarchar(255) = 0,
-	@LastName nvarchar(255) = 0, 
-	@Gender nvarchar(255) = 0, 
-	@Password nvarchar(255) = 0, 
-	@Email nvarchar(255) = 0, 
-	@DateCreated nvarchar(255) = 0,
-	@ID int =null Output
+	@UserName nvarchar(255), 
+	@FirstName nvarchar(255),
+	@LastName nvarchar(255), 
+	@Gender nvarchar(255), 
+	@Password nvarchar(255), 
+	@Email nvarchar(255), 
+	@Status BIT, 
+	@DateCreated nvarchar(255)
 AS
 BEGIN TRY
 BEGIN TRAN
@@ -44,10 +46,10 @@ VALUES
 		@Gender,
 		@Password,
 		@DateCreated,
-		1,/*Status = True*/
+		@Status,
 		@Email
 )
-Set @ID=@@IDENTITY
+SELECT SCOPE_IDENTITY()
 COMMIT TRAN
 END TRY
 

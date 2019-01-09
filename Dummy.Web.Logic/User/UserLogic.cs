@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Linq;
     using Dummy.Web.Common.Enums;
     using Dummy.Web.Common.Exceptions;
     using Dummy.Web.Common.Models.User;
@@ -37,8 +38,8 @@
                 Created = DateTime.Now,
                 Gender = GenderType.Unknown,
             };
-
-            return _userRepository.AddUser(complexUser);
+            var id = _userRepository.AddUser(complexUser);
+            return id;
         }
         public bool UpdateUser(UserUpdateModel userUpdateModel)
         {
@@ -59,7 +60,16 @@
 
         public IEnumerable<UserModelSimplified> GetAvailableUsers()
         {
-            return _userRepository.GetActiveUsers();
+            var users = _userRepository.GetActiveUsers();
+
+            return users.Select(x => new UserModelSimplified
+            {
+                Created = x.Created,
+                Email = x.Email,
+                FamilyName = x.FamilyName,
+                GivenName = x.GivenName,
+                Id = x.Id
+            });
         }
 
         private void ValidateModel(object model)

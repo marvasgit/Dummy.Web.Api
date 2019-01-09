@@ -6,27 +6,27 @@
     public class User
     {
         [Column("ID")]
-        int Id { get; set; }
+        public int Id { get; set; }
 
         [Column("UserName")]
-        string UserName { get; set; }
+        public string UserName { get; set; }
 
         [Column("FirstName")]
-        string GivenName { get; set; }
+        public string GivenName { get; set; }
 
         [Column("LastName")]
-        string FamilyName { get; set; }
+        public string FamilyName { get; set; }
 
         [Column("Gender")]
-        string Gender { get; set; }
+        public string Gender { get; set; }
 
         [Column("Password")]
-        string Password { get; set; }
+        public string Password { get; set; }
 
         [Column("Email")]
-        string Email { get; set; }
+        public string Email { get; set; }
 
         [Column("DateCreated")]
-        DateTime Created { get; set; }
+        public DateTime Created { get; set; }
     }
 }

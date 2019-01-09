@@ -7,7 +7,7 @@
     {
         int AddUser(UserModel user, bool status = true);
         bool DeleteUser(string email);
-        IEnumerable<UserModelSimplified> GetActiveUsers();
+        IEnumerable<Entities.User> GetActiveUsers();
         bool UpdateUser(UserUpdateModel user);
     }
 }

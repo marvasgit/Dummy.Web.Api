@@ -64,9 +64,9 @@
             return _dapperHelper.ExecuteStoredProcedure<bool>(CommandType.StoredProcedure, UpdateUserStoredProcedure, parameters);
         }
 
-        public IEnumerable<UserModelSimplified> GetActiveUsers()
+        public IEnumerable<Entities.User> GetActiveUsers()
         {
-            return _dapperHelper.ExecuteDataset<UserModelSimplified>(CommandType.StoredProcedure, GetActiveUsersStoredProcedureName);
+            return _dapperHelper.ExecuteDataset<Entities.User>(CommandType.StoredProcedure, GetActiveUsersStoredProcedureName);
         }
     }
 }
